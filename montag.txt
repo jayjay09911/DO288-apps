@@ -1,0 +1,32 @@
+    1  sudo podman -ps --format "{{.ID}} {{.Image}} {{.Names}}" 2e0ba5e8b9f5
+    2  sudo podman ps --format "{{.ID}} {{.Image}} {{.Names}}" 2e0ba5e8b9f5
+    3  sudo podman ps --format "{{.ID}} {{.Image}} {{.Names}}"
+    4  sudo podman exec -it mysql-basic /bin/bash
+    5  lab container-create finish
+    6  history
+    7  lab container-review start
+    8  sudo podman run -name httpd-basic - p8080:80 -d redhattraining/httpd-parent:2.4
+    9  sudo podman run -name httpd-basic -p 8080:80 -d redhattraining/httpd-parent:2.4
+   10  sudo podman ps
+   11  sudo mkdir -pv /var/local/mysql
+   12  sudo semanage fcontext -a -t container_file_t '/var/local/mysql(/.*)?'
+   13  sudo restorecon -R /var/local/mysql
+   14  ls -dZ /var/local/mysql
+   15  sudo chown -Rv 27:27 /var/local/mysql
+   16  sudo podman pull rhscl/mysql-57-rhel7
+   17  sudo podman run --name persist-db -d -v /var/local/mysql:/var/lib/mysql/data -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 rhscl/mysql-57-rhel7
+   18  sudo podman ps --format="table {{.ID}} {{.Names}} {{.Status}}"
+   19  ls -l /var/local/mysql
+   20  lab manage-storage finish
+   21  lab manage-networking start
+   22  sudo podman run --name mysqldb-port -d -v /var/local/mysql:/var/lib/mysql/data -p 13306:3306 -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 rhscl/mysql-57-rhel7
+   23  sudo podman ps
+   24  mysql -uuser1 -h 127.0.0.1 -pmypa55 -P13306 items < /home/student/DO180/labs/manage-networking/db.sql
+   25  mysql -uuser1 -h 127.0.0.1 -pmypa55 -P13306 items -e "select * from Item"
+   26  sudo podman exec -it mysqldb-port \ 
+   27  sudo podman exec -it mysqldb-port \
+   28  lab manage-networking finish
+   29  lab manage-review start
+   30  lab manage-review finish+
+   31  cd
+   32  history >> montag.txt
